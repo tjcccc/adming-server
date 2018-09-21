@@ -2,19 +2,35 @@ extends layout
 
 block content
   h1= title
+  //- form(
+  //-   action='/user_create'
+  //-   method='POST'
+  //- )
+  //-   label= 'Username'
+  //-   input(
+  //-     type='text'
+  //-     name='username'
+  //-   )
+  //-   label= 'Password'
+  //-   input(
+  //-     type='password'
+  //-     name='password'
+  //-   )
+  //-   div
+  //-     button= 'Create User'
   form(
-    action='/user_create'
+    action='/game_consoles/create'
     method='POST'
   )
-    label= 'Username'
+    label= 'Game Console'
     input(
       type='text'
-      name='username'
+      name='consoleName'
     )
-    label= 'Password'
+    label= 'Manufacturer'
     input(
-      type='password'
-      name='password'
+      type='text'
+      name='manufacturer'
     )
     div
-      button= 'Create User'
+      button= 'Add Game Console'

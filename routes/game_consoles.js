@@ -4,8 +4,6 @@ var router = express.Router();
 const mysql = require('mysql');
 const dbConfig = require('.././db-config');
 const bodyParser = require('body-parser');
-const bcrypt = require('bcrypt');
-const saltRounds = 10;
 
 const mysqlConnection = mysql.createConnection({
   host: dbConfig.mysql.host,
@@ -24,33 +22,28 @@ mysqlConnection.connect((error) => {
 router.use(bodyParser.urlencoded({ extended: false }));
 
 router.post('/create', (req, res) => {
-  console.log('Trying to create a new user...');
+  console.log('Trying to add a new game console...');
 
-  console.log('Username: ' + req.body.username);
+  const consoleName = req.body.consoleName;
+  const manufacturer = req.body.manufacturer;
 
-  const username = req.body.username;
-
-  const rawPassword = req.body.password;
-  const salt = bcrypt.genSaltSync(saltRounds);
-  const password = bcrypt.hashSync(rawPassword, salt);
-
-  const queryString = 'INSERT INTO users (username, password) VALUES (?, ?)'
-  mysqlConnection.query(queryString, [username, password], (error, results, fields) => {
+  const queryString = 'INSERT INTO game_consoles (console_name, manufacturer) VALUES (?, ?)'
+  mysqlConnection.query(queryString, [consoleName, manufacturer], (error, results, fields) => {
     if (error) {
-      console.log('Failed to insert new user: ' + error);
+      console.log('Failed to insert new console: ' + error);
       res.sendStatus(500);
       return;
     }
-    console.log('Inserted a new user with id: ', results.insertedId);
+    console.log('Inserted a new console with id: ', results.insertedId);
     res.end();
   });
 });
 
 router.get('/all', (req, res) => {
-  const queryString = 'SELECT * FROM users';
+  const queryString = 'SELECT * FROM game_consoles';
   mysqlConnection.query(queryString, (error, results, fields) => {
     if (error) {
-      console.log('Failed to query for users: ' + error);
+      console.log('Failed to query for game_consoles: ' + error);
       res.sendStatus(500);
       return;
     }
@@ -59,30 +52,22 @@ router.get('/all', (req, res) => {
 });
 
 router.get('/:id', (req, res) => {
-  console.log('Fetching user with id: ' + req.params.id);
+  console.log('Fetching game console with id: ' + req.params.id);
 
-  const userId = req.params.id;
-  console.log(userId);
-  const queryString = 'SELECT * FROM users WHERE id = ?';
-  mysqlConnection.query(queryString, [userId], (error, results, fields) => {
+  const consoleId = req.params.id;
+  const queryString = 'SELECT * FROM game_consoles WHERE id = ?';
+  mysqlConnection.query(queryString, [consoleId], (error, results, fields) => {
 
     if (error) {
-      console.log('Failed to query for users: ' + error);
+      console.log('Failed to query for game_consoles: ' + error);
       res.sendStatus(500);
       return;
     }
 
     console.log('Fetched.');
 
-    console.log(results);
-
-    // const users = results.map((row) => {
-    //   return { name: row.name };
-    // });
-
     res.json(results);
   });
-
 });
 
 /* GET users listing. */
