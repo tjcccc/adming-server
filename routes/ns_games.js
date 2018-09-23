@@ -6,7 +6,7 @@ const dbConfig = require('.././db-config');
 
 const NSGame = require('../models/ns-game');
 
-const dbPath = 'mongodb://' + dbConfig.mongodb.host + '/' + dbConfig.mongodb.database;
+const dbPath = 'mongodb://' + dbConfig.mongodb.user + ':' + dbConfig.mongodb.password + '@' + dbConfig.mongodb.host + '/' + dbConfig.mongodb.database;
 console.log('db path: ' + dbPath);
 mongoose.connect(dbPath, {
   useNewUrlParser: true
@@ -34,8 +34,9 @@ router.post('/create', (req, res, next) => {
       });
     })
     .catch(err => {
-      console.log(err)});
-      res.status(500).json({ error: err });
+      console.log(err);
+      res.status(500).json({ error: err })
+    });
 });
 
 // Get All
