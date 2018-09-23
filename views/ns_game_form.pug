@@ -1,0 +1,45 @@
+extends layout
+
+block content
+  h1= title
+  form(
+    action='/ns_games/create'
+    method='POST'
+  )
+    label= 'Game Id'
+    input(
+      type='text'
+      name='gameId'
+    )
+    label= 'Name (JP)'
+    input(
+      type='text'
+      name='nameJP'
+    )
+    label= 'Name (EN)'
+    input(
+      type='text'
+      name='nameEN'
+    )
+    label= 'Name (CN)'
+    input(
+      type='text'
+      name='nameCN'
+    )
+    label= 'Publisher'
+    input(
+      type='text'
+      name='publisher'
+    )
+    label= 'Genre'
+    input(
+      type='text'
+      name='genre'
+    )
+    label= 'Publish Date'
+    input(
+      type='date'
+      name='publishDate'
+    )
+    div
+      button= 'Add a NS Game'

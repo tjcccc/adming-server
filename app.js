@@ -8,6 +8,8 @@ var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 var gameConsolesRouter = require('./routes/game_consoles');
 var formRouter = require('./routes/form');
+var nsGamesRouter = require('./routes/ns_games');
+var nsGameFormRouter = require('./routes/ns_game_form');
 
 var app = express();
 
@@ -25,6 +27,8 @@ app.use('/', indexRouter);
 app.use('/users', usersRouter);
 app.use('/game_consoles', gameConsolesRouter);
 app.use('/form', formRouter);
+app.use('/ns_games', nsGamesRouter);
+app.use('/ns_game_form', nsGameFormRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
