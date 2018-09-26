@@ -8,10 +8,18 @@ a {
 }
 
 label,
-input {
+input,
+select,
+textarea {
   display: block;
 }
 
-input {
+input,
+select,
+textarea {
   margin-bottom: 20px;
+}
+
+button {
+  margin-bottom: 40px;
 }

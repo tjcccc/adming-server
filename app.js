@@ -10,6 +10,8 @@ var gameConsolesRouter = require('./routes/game_consoles');
 var formRouter = require('./routes/form');
 var nsGamesRouter = require('./routes/ns_games');
 var nsGameFormRouter = require('./routes/ns_game_form');
+var dq7LittleMedalsRouter = require('./routes/dq7_little_medals');
+var dq7LittleMedalFormRouter = require('./routes/dq7_little_medal_form');
 
 var app = express();
 
@@ -29,6 +31,8 @@ app.use('/game_consoles', gameConsolesRouter);
 app.use('/form', formRouter);
 app.use('/ns_games', nsGamesRouter);
 app.use('/ns_game_form', nsGameFormRouter);
+app.use('/dq7_little_medals', dq7LittleMedalsRouter);
+app.use('/dq7_little_medal_form', dq7LittleMedalFormRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

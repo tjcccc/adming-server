@@ -1,0 +1,51 @@
+extends layout
+
+block content
+  h1= title
+  form(
+    action="/dq7_little_medals/"
+  )
+    label= 'No. '
+    input(
+      id='orderId'
+      type='number'
+      name='orderid'
+    )
+    div
+      button(
+        onclick='console.log("123");'
+      )= 'Get Medal Info'
+  form(
+  )
+    label= '場所'
+    input(
+      type='text'
+      name='place'
+    )
+    label= '時代'
+    select(
+      name='era'
+    )
+      option= '過去'
+      option= '現在'
+      option= '？'
+    label= '入手方法'
+    input(
+      type='text'
+      name='specificMethod'
+    )
+    label= '入手済み'
+    input(
+      type='checkbox'
+      name='isFound'
+    )
+    label= 'Memo'
+    textarea(
+      name='memo'
+    )
+    div
+      button= 'Update'
+  div
+      button(
+        onclick='console.log("test.");'
+      )= 'test'
