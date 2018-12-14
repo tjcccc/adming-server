@@ -6,7 +6,7 @@ var logger = require('morgan');
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
-var gameConsolesRouter = require('./routes/game_consoles');
+// var gameConsolesRouter = require('./routes/game_consoles');
 var formRouter = require('./routes/form');
 var nsGamesRouter = require('./routes/ns_games');
 var nsGameFormRouter = require('./routes/ns_game_form');
@@ -27,7 +27,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
-app.use('/game_consoles', gameConsolesRouter);
+// app.use('/game_consoles', gameConsolesRouter);
 app.use('/form', formRouter);
 app.use('/ns_games', nsGamesRouter);
 app.use('/ns_game_form', nsGameFormRouter);

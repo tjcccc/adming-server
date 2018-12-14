@@ -4,11 +4,14 @@ var router = express.Router();
 const mysql = require('mysql');
 const dbConfig = require('.././db-config');
 const bodyParser = require('body-parser');
+const uuid = require('uuid/v1');
 const bcrypt = require('bcrypt');
 const saltRounds = 10;
+const moment = require('moment');
 
 const mysqlConnection = mysql.createConnection({
   host: dbConfig.mysql.host,
+  port: dbConfig.mysql.port,
   user: dbConfig.mysql.user,
   password: dbConfig.mysql.password,
   database: dbConfig.mysql.database
@@ -23,25 +26,31 @@ mysqlConnection.connect((error) => {
 
 router.use(bodyParser.urlencoded({ extended: false }));
 
-router.post('/create', (req, res) => {
+router.post('/', (req, res) => {
   console.log('Trying to create a new user...');
 
-  console.log('Username: ' + req.body.username);
+  console.log('Username: ' + req.body.name);
 
-  const username = req.body.username;
+  const id = uuid();
+
+  const name = req.body.name;
+  const level = 0;
+  const state = 0;
+  const email = req.body.email;
+  const createTime = moment(Date.now()).format('YYYY-MM-DD HH:mm:ss');
 
   const rawPassword = req.body.password;
   const salt = bcrypt.genSaltSync(saltRounds);
   const password = bcrypt.hashSync(rawPassword, salt);
 
-  const queryString = 'INSERT INTO users (username, password) VALUES (?, ?)'
-  mysqlConnection.query(queryString, [username, password], (error, results, fields) => {
+  const queryString = 'INSERT INTO users (id, name, password, level, state, create_time, email) VALUES (UUID_TO_BIN(?), ?, ?, ?, ?, ?, ?)';
+  mysqlConnection.query(queryString, [id, name, password, level, state, createTime, email], (error, results, fields) => {
     if (error) {
       console.log('Failed to insert new user: ' + error);
       res.sendStatus(500);
       return;
     }
-    console.log('Inserted a new user with id: ', results.insertedId);
+    console.log('Inserted a new user with id: ', results.insertId);
     res.end();
   });
 });
