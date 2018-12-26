@@ -35,7 +35,7 @@ router.post('/create', (req, res, next) => {
     })
     .catch(err => {
       console.log(err);
-      res.status(500).json({ error: err })
+      res.status(500).json({ error: err });
     });
 });
 
@@ -90,10 +90,10 @@ router.patch('/:id', (req, res, next) => {
   }
 
   NSGame
-    .update({ "game_id" : id }, { $set: updateOps })
+    .update({ 'game_id' : id }, { $set: updateOps })
     .exec()
     .then(doc => {
-      console.log(result);
+      console.log(res);
       res.status(200).json(doc);
     })
     .catch(err => {
@@ -107,7 +107,7 @@ router.patch('/:id', (req, res, next) => {
 router.delete('/:id', (req, res, next) => {
   const id = req.params.id;
   NSGame
-    .remove({ "game_id" : id })
+    .remove({ 'game_id' : id })
     .exec()
     .then(doc => {
       res.status(200).json(doc);

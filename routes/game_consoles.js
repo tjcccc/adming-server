@@ -27,7 +27,7 @@ router.post('/create', (req, res) => {
   const consoleName = req.body.consoleName;
   const manufacturer = req.body.manufacturer;
 
-  const queryString = 'INSERT INTO game_consoles (console_name, manufacturer) VALUES (?, ?)'
+  const queryString = 'INSERT INTO game_consoles (console_name, manufacturer) VALUES (?, ?)';
   mysqlConnection.query(queryString, [consoleName, manufacturer], (error, results, fields) => {
     if (error) {
       console.log('Failed to insert new console: ' + error);

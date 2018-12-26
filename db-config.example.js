@@ -24,6 +24,6 @@ const dbConfig = {
     password: '!',
     database: 'adming'
   }
-}
+};
 
 module.exports = dbConfig;

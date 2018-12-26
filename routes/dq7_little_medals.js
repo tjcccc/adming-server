@@ -26,7 +26,7 @@ router.post('/create', function(req, res, next) {
     memo: req.body.memo
   };
   const sqlQuery = 'insert into ' + table + '(order_id, place, era, specific_method, is_found, memo) values(${orderId}, ${place}, ${era}, ${specificMethod}, ${isFound}, ${memo})';
-  console.log(sqlQuery, values);
+  // console.log(sqlQuery, values);
   database.query(sqlQuery, values)
     .then(function(data) {
       console.log('DATA: ', data);

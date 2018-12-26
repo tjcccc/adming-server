@@ -1,5 +1,6 @@
 var express = require('express');
 var router = express.Router();
+var logger = require('morgan');
 
 const mysql = require('mysql');
 const dbConfig = require('.././db-config');
@@ -21,15 +22,15 @@ mysqlConnection.connect((error) => {
   if (error) {
     throw error;
   }
-  console.debug('MySQL Connected...');
+  logger.log('MySQL Connected...');
 });
 
 router.use(bodyParser.urlencoded({ extended: false }));
 
 router.post('/', (req, res) => {
-  console.log('Trying to create a new user...');
+  logger.log('Trying to create a new user...');
 
-  console.log('Username: ' + req.body.name);
+  logger.log('Username: ' + req.body.name);
 
   const id = uuid();
 
@@ -55,7 +56,7 @@ router.post('/', (req, res) => {
   });
 });
 
-router.get('/all', (req, res) => {
+router.get('/', (req, res) => {
   const queryString = 'SELECT * FROM users';
   mysqlConnection.query(queryString, (error, results, fields) => {
     if (error) {
@@ -95,8 +96,8 @@ router.get('/:id', (req, res) => {
 });
 
 /* GET users listing. */
-router.get('/', function(req, res, next) {
-  res.send('respond with a resource');
-});
+// router.get('/', function(req, res, next) {
+//   res.send('respond with a resource');
+// });
 
 module.exports = router;
