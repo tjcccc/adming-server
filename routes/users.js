@@ -1,6 +1,7 @@
-var express = require('express');
-var router = express.Router();
-var logger = require('morgan');
+const express = require('express');
+const router = express.Router();
+const morgan = require('morgan');
+const logger = morgan('combined');
 
 const mysql = require('mysql');
 const dbConfig = require('.././db-config');
@@ -22,15 +23,15 @@ mysqlConnection.connect((error) => {
   if (error) {
     throw error;
   }
-  logger.log('MySQL Connected...');
+  // logger.log('MySQL Connected...');
 });
 
 router.use(bodyParser.urlencoded({ extended: false }));
 
 router.post('/', (req, res) => {
-  logger.log('Trying to create a new user...');
+  // logger.log('Trying to create a new user...');
 
-  logger.log('Username: ' + req.body.name);
+  // logger.log('Username: ' + req.body.name);
 
   const id = uuid();
 

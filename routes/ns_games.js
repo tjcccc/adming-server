@@ -2,7 +2,7 @@ var express = require('express');
 var router = express.Router();
 
 const mongoose = require('mongoose');
-const dbConfig = require('.././db-config');
+const dbConfig = require('../db-config');
 
 const NSGame = require('../models/ns-game');
 
